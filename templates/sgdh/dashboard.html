@@ -1,0 +1,129 @@
+{% extends "sgdh/shell.html" %}
+
+{% block page_title %}Tableau de bord{% endblock %}
+
+{% block page_content %}
+<div>
+    <div style="margin-bottom: 24px;">
+        <h1 style="font-size: 22px; font-weight: 800; color: #0F172A; margin: 0;">Tableau de bord</h1>
+        <p style="color: #64748B; font-size: 14px; margin-top: 4px;">
+            {% if user.is_authenticated %}Bonjour, {{ user.first_name }}. Voici l'état de vos habilitations.{% else %}Bonjour. Voici l'état des habilitations.{% endif %}
+        </p>
+    </div>
+
+    <!-- KPI Stats -->
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px;">
+        <div class="card" style="padding: 20px 22px;">
+            <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 14px;">
+                <div style="font-size: 13px; font-weight: 600; color: #64748B;">En cours</div>
+                <div style="width: 36px; height: 36px; border-radius: 10px; background: #FFF7ED; display: flex; align-items: center; justify-content: center; font-size: 17px;">⏱️</div>
+            </div>
+            <div style="font-size: 30px; font-weight: 800; color: #0F172A; line-height: 1;">3</div>
+            <div style="font-size: 12px; color: #94A3B8; margin-top: 6px;">+1 cette semaine</div>
+        </div>
+
+        <div class="card" style="padding: 20px 22px;">
+            <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 14px;">
+                <div style="font-size: 13px; font-weight: 600; color: #64748B;">Validées</div>
+                <div style="width: 36px; height: 36px; border-radius: 10px; background: #F0FDF4; display: flex; align-items: center; justify-content: center; font-size: 17px;">✅</div>
+            </div>
+            <div style="font-size: 30px; font-weight: 800; color: #0F172A; line-height: 1;">18</div>
+            <div style="font-size: 12px; color: #94A3B8; margin-top: 6px;">+4 ce mois</div>
+        </div>
+
+        <div class="card" style="padding: 20px 22px;">
+            <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 14px;">
+                <div style="font-size: 13px; font-weight: 600; color: #64748B;">Rejetées</div>
+                <div style="width: 36px; height: 36px; border-radius: 10px; background: #FEF2F2; display: flex; align-items: center; justify-content: center; font-size: 17px;">❌</div>
+            </div>
+            <div style="font-size: 30px; font-weight: 800; color: #0F172A; line-height: 1;">2</div>
+            <div style="font-size: 12px; color: #94A3B8; margin-top: 6px;">−1 vs mois dernier</div>
+        </div>
+
+        <div class="card" style="padding: 20px 22px;">
+            <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 14px;">
+                <div style="font-size: 13px; font-weight: 600; color: #64748B;">Exécutées</div>
+                <div style="width: 36px; height: 36px; border-radius: 10px; background: #EFF6FF; display: flex; align-items: center; justify-content: center; font-size: 17px;">⚡</div>
+            </div>
+            <div style="font-size: 30px; font-weight: 800; color: #0F172A; line-height: 1;">31</div>
+            <div style="font-size: 12px; color: #94A3B8; margin-top: 6px;">+7 ce mois</div>
+        </div>
+    </div>
+
+    <!-- Recent requests -->
+    <div class="card">
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 18px 22px 0;">
+            <h2 style="font-size: 15px; font-weight: 700; color: #0F172A; margin: 0;">Dernières demandes</h2>
+            <a href="{% url 'sgdh:requests_list' %}" class="btn-secondary" style="font-size: 13px; padding: 6px 14px;">Voir tout</a>
+        </div>
+        <div style="margin-top: 12px;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Référence</th>
+                        <th>Type</th>
+                        <th>Ressource</th>
+                        <th>Statut</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span style="font-family: monospace; font-size: 13px; color: #0EA5E9; font-weight: 600;">DEM-2026-0142</span></td>
+                        <td><span style="font-size: 13px; color: #475569;">Application</span></td>
+                        <td><span style="font-size: 13px; color: #0F172A; font-weight: 500;">SAP ERP – Module Finance</span></td>
+                        <td><span class="badge" style="background: #FFF7ED; color: #C2410C;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #F97316; display: inline-block;"></span>En attente</span></td>
+                        <td><span style="font-size: 13px; color: #64748B;">18 juil. 2026</span></td>
+                        <td><a href="#" style="font-size: 13px; color: #0EA5E9; font-weight: 600; text-decoration: none;">Détails 🔗</a></td>
+                    </tr>
+                    <tr>
+                        <td><span style="font-family: monospace; font-size: 13px; color: #0EA5E9; font-weight: 600;">DEM-2026-0141</span></td>
+                        <td><span style="font-size: 13px; color: #475569;">Dossier réseau</span></td>
+                        <td><span style="font-size: 13px; color: #0F172A; font-weight: 500;">//SRV-FINANCE/Compta2026</span></td>
+                        <td><span class="badge" style="background: #F0FDF4; color: #15803D;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #22C55E; display: inline-block;"></span>Validée</span></td>
+                        <td><span style="font-size: 13px; color: #64748B;">15 juil. 2026</span></td>
+                        <td><a href="#" style="font-size: 13px; color: #0EA5E9; font-weight: 600; text-decoration: none;">Détails 🔗</a></td>
+                    </tr>
+                    <tr>
+                        <td><span style="font-family: monospace; font-size: 13px; color: #0EA5E9; font-weight: 600;">DEM-2026-0138</span></td>
+                        <td><span style="font-size: 13px; color: #475569;">Zone physique</span></td>
+                        <td><span style="font-size: 13px; color: #0F172A; font-weight: 500;">Datacenter DC-02 (Casablanca)</span></td>
+                        <td><span class="badge" style="background: #EFF6FF; color: #1D4ED8;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #3B82F6; display: inline-block;"></span>Exécutée</span></td>
+                        <td><span style="font-size: 13px; color: #64748B;">10 juil. 2026</span></td>
+                        <td><a href="#" style="font-size: 13px; color: #0EA5E9; font-weight: 600; text-decoration: none;">Détails 🔗</a></td>
+                    </tr>
+                    <tr>
+                        <td><span style="font-family: monospace; font-size: 13px; color: #0EA5E9; font-weight: 600;">DEM-2026-0135</span></td>
+                        <td><span style="font-size: 13px; color: #475569;">Application</span></td>
+                        <td><span style="font-size: 13px; color: #0F172A; font-weight: 500;">Power BI Service – Workspace RH</span></td>
+                        <td><span class="badge" style="background: #FEF2F2; color: #B91C1C;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #EF4444; display: inline-block;"></span>Rejetée</span></td>
+                        <td><span style="font-size: 13px; color: #64748B;">5 juil. 2026</span></td>
+                        <td><a href="#" style="font-size: 13px; color: #0EA5E9; font-weight: 600; text-decoration: none;">Détails 🔗</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Quick actions -->
+    <div style="margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <div class="card" style="padding: 20px;">
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                <div style="width: 36px; height: 36px; border-radius: 10px; background: #EFF6FF; display: flex; align-items: center; justify-content: center; font-size: 17px;">➕</div>
+                <div style="font-size: 14px; font-weight: 700; color: #0F172A;">Nouvelle demande</div>
+            </div>
+            <p style="font-size: 13px; color: #64748B; margin: 0 0 14px;">Soumettez une demande d'accès à une ressource ou une application.</p>
+            <a href="{% url 'sgdh:new_request' %}" class="btn-primary" style="font-size: 13px;">Créer une demande</a>
+        </div>
+        <div class="card" style="padding: 20px;">
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                <div style="width: 36px; height: 36px; border-radius: 10px; background: #FFF7ED; display: flex; align-items: center; justify-content: center; font-size: 17px;">✅</div>
+                <div style="font-size: 14px; font-weight: 700; color: #0F172A;">File de validation</div>
+            </div>
+            <p style="font-size: 13px; color: #64748B; margin: 0 0 14px;">3 demandes en attente de votre validation. Délai moyen : 2 jours.</p>
+            <a href="{% url 'sgdh:validation_queue' %}" class="btn-secondary" style="font-size: 13px;">Voir les validations</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

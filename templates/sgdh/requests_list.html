@@ -1,0 +1,189 @@
+{% extends "sgdh/shell.html" %}
+
+{% block page_title %}Toutes les demandes{% endblock %}
+
+{% block page_content %}
+<div>
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
+        <div>
+            <h1 style="font-size: 22px; font-weight: 800; color: #0F172A; margin: 0;">Toutes les demandes</h1>
+            <p style="color: #64748B; font-size: 14px; margin-top: 4px;">8 demandes trouvées</p>
+        </div>
+        <a href="{% url 'sgdh:new_request' %}" class="btn-primary">
+            <span style="display: flex; align-items: center; gap: 6px;">➕ Nouvelle demande</span>
+        </a>
+    </div>
+
+    <!-- Filters -->
+    <div class="card" style="padding: 16px 20px; margin-bottom: 16px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+        <div style="display: flex; align-items: center; gap: 6px; color: #64748B; font-size: 13px; font-weight: 600;">
+            <span>🔍</span> Filtres
+        </div>
+        <div style="width: 1px; height: 24px; background: #E2E8F0;"></div>
+        <select class="form-input" style="width: auto; font-size: 13px; height: 36px;">
+            <option>Tous les statuts</option>
+            <option>En attente</option>
+            <option>Validée</option>
+            <option>Rejetée</option>
+            <option>Exécutée</option>
+            <option>Brouillon</option>
+        </select>
+        <select class="form-input" style="width: auto; font-size: 13px; height: 36px;">
+            <option>Tous les types</option>
+            <option>Application</option>
+            <option>Dossier réseau</option>
+            <option>Zone physique</option>
+        </select>
+        <select class="form-input" style="width: auto; font-size: 13px; height: 36px;">
+            <option>Toute période</option>
+            <option>Ce mois</option>
+            <option>3 derniers mois</option>
+            <option>Cette année</option>
+        </select>
+        <div style="margin-left: auto;">
+            <div style="position: relative;">
+                <div style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #94A3B8;">
+                    <span style="font-size: 14px;">🔍</span>
+                </div>
+                <input class="form-input" placeholder="Rechercher…" style="padding-left: 32px; height: 36px; width: 200px; font-size: 13px;">
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <table>
+            <thead>
+                <tr>
+                    <th>Référence</th>
+                    <th>Type</th>
+                    <th>Ressource</th>
+                    <th>Demandeur</th>
+                    <th>Statut</th>
+                    <th>Date</th>
+                    <th style="text-align: right;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span style="font-family: monospace; font-size: 12.5px; color: #0EA5E9; font-weight: 700;">DEM-2026-0142</span></td>
+                    <td><span style="font-size: 12px; background: #F1F5F9; color: #475569; padding: 2px 8px; border-radius: 99px; font-weight: 600;">Application</span></td>
+                    <td style="max-width: 220px;"><span style="font-size: 13px; color: #0F172A; font-weight: 500;">SAP ERP – Module Finance</span></td>
+                    <td><span style="font-size: 13px; color: #64748B;">Amine Mansouri</span></td>
+                    <td><span class="badge" style="background: #FFF7ED; color: #C2410C;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #F97316; display: inline-block;"></span>En attente</span></td>
+                    <td><span style="font-size: 12px; color: #94A3B8;">18 juil. 2026</span></td>
+                    <td>
+                        <div style="display: flex; gap: 4px; justify-content: flex-end;">
+                            <a href="#" class="btn-secondary" style="font-size: 12px; padding: 5px 10px;">👁️ Détails</a>
+                            <a href="#" class="btn-secondary" style="font-size: 12px; padding: 5px 10px;">✏️</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span style="font-family: monospace; font-size: 12.5px; color: #0EA5E9; font-weight: 700;">DEM-2026-0141</span></td>
+                    <td><span style="font-size: 12px; background: #F1F5F9; color: #475569; padding: 2px 8px; border-radius: 99px; font-weight: 600;">Dossier réseau</span></td>
+                    <td style="max-width: 220px;"><span style="font-size: 13px; color: #0F172A; font-weight: 500;">//SRV-FINANCE/Compta2026</span></td>
+                    <td><span style="font-size: 13px; color: #64748B;">Sara El Fassi</span></td>
+                    <td><span class="badge" style="background: #F0FDF4; color: #15803D;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #22C55E; display: inline-block;"></span>Validée</span></td>
+                    <td><span style="font-size: 12px; color: #94A3B8;">15 juil. 2026</span></td>
+                    <td>
+                        <div style="display: flex; gap: 4px; justify-content: flex-end;">
+                            <a href="#" class="btn-secondary" style="font-size: 12px; padding: 5px 10px;">👁️ Détails</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span style="font-family: monospace; font-size: 12.5px; color: #0EA5E9; font-weight: 700;">DEM-2026-0138</span></td>
+                    <td><span style="font-size: 12px; background: #F1F5F9; color: #475569; padding: 2px 8px; border-radius: 99px; font-weight: 600;">Zone physique</span></td>
+                    <td style="max-width: 220px;"><span style="font-size: 13px; color: #0F172A; font-weight: 500;">Datacenter DC-02 (Casablanca)</span></td>
+                    <td><span style="font-size: 13px; color: #64748B;">Amine Mansouri</span></td>
+                    <td><span class="badge" style="background: #EFF6FF; color: #1D4ED8;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #3B82F6; display: inline-block;"></span>Exécutée</span></td>
+                    <td><span style="font-size: 12px; color: #94A3B8;">10 juil. 2026</span></td>
+                    <td>
+                        <div style="display: flex; gap: 4px; justify-content: flex-end;">
+                            <a href="#" class="btn-secondary" style="font-size: 12px; padding: 5px 10px;">👁️ Détails</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span style="font-family: monospace; font-size: 12.5px; color: #0EA5E9; font-weight: 700;">DEM-2026-0135</span></td>
+                    <td><span style="font-size: 12px; background: #F1F5F9; color: #475569; padding: 2px 8px; border-radius: 99px; font-weight: 600;">Application</span></td>
+                    <td style="max-width: 220px;"><span style="font-size: 13px; color: #0F172A; font-weight: 500;">Power BI Service – Workspace RH</span></td>
+                    <td><span style="font-size: 13px; color: #64748B;">Karim Berrada</span></td>
+                    <td><span class="badge" style="background: #FEF2F2; color: #B91C1C;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #EF4444; display: inline-block;"></span>Rejetée</span></td>
+                    <td><span style="font-size: 12px; color: #94A3B8;">5 juil. 2026</span></td>
+                    <td>
+                        <div style="display: flex; gap: 4px; justify-content: flex-end;">
+                            <a href="#" class="btn-secondary" style="font-size: 12px; padding: 5px 10px;">👁️ Détails</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span style="font-family: monospace; font-size: 12.5px; color: #0EA5E9; font-weight: 700;">DEM-2026-0130</span></td>
+                    <td><span style="font-size: 12px; background: #F1F5F9; color: #475569; padding: 2px 8px; border-radius: 99px; font-weight: 600;">Application</span></td>
+                    <td style="max-width: 220px;"><span style="font-size: 13px; color: #0F172A; font-weight: 500;">Jira – Projet DevOps</span></td>
+                    <td><span style="font-size: 13px; color: #64748B;">Amine Mansouri</span></td>
+                    <td><span class="badge" style="background: #F0FDF4; color: #15803D;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #22C55E; display: inline-block;"></span>Validée</span></td>
+                    <td><span style="font-size: 12px; color: #94A3B8;">28 juin 2026</span></td>
+                    <td>
+                        <div style="display: flex; gap: 4px; justify-content: flex-end;">
+                            <a href="#" class="btn-secondary" style="font-size: 12px; padding: 5px 10px;">👁️ Détails</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span style="font-family: monospace; font-size: 12.5px; color: #0EA5E9; font-weight: 700;">DEM-2026-0125</span></td>
+                    <td><span style="font-size: 12px; background: #F1F5F9; color: #475569; padding: 2px 8px; border-radius: 99px; font-weight: 600;">Application</span></td>
+                    <td style="max-width: 220px;"><span style="font-size: 13px; color: #0F172A; font-weight: 500;">GitLab CI/CD – Groupe Infra</span></td>
+                    <td><span style="font-size: 13px; color: #64748B;">Fatima Zahrae</span></td>
+                    <td><span class="badge" style="background: #FFF7ED; color: #C2410C;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #F97316; display: inline-block;"></span>En attente</span></td>
+                    <td><span style="font-size: 12px; color: #94A3B8;">22 juin 2026</span></td>
+                    <td>
+                        <div style="display: flex; gap: 4px; justify-content: flex-end;">
+                            <a href="#" class="btn-secondary" style="font-size: 12px; padding: 5px 10px;">👁️ Détails</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span style="font-family: monospace; font-size: 12.5px; color: #0EA5E9; font-weight: 700;">DEM-2026-0120</span></td>
+                    <td><span style="font-size: 12px; background: #F1F5F9; color: #475569; padding: 2px 8px; border-radius: 99px; font-weight: 600;">Dossier réseau</span></td>
+                    <td style="max-width: 220px;"><span style="font-size: 13px; color: #0F172A; font-weight: 500;">//SRV-PROJETS/DevOps2026</span></td>
+                    <td><span style="font-size: 13px; color: #64748B;">Amine Mansouri</span></td>
+                    <td><span class="badge" style="background: #F8FAFC; color: #475569;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #94A3B8; display: inline-block;"></span>Brouillon</span></td>
+                    <td><span style="font-size: 12px; color: #94A3B8;">18 juin 2026</span></td>
+                    <td>
+                        <div style="display: flex; gap: 4px; justify-content: flex-end;">
+                            <a href="#" class="btn-secondary" style="font-size: 12px; padding: 5px 10px;">👁️ Détails</a>
+                            <a href="#" class="btn-secondary" style="font-size: 12px; padding: 5px 10px;">✏️</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span style="font-family: monospace; font-size: 12.5px; color: #0EA5E9; font-weight: 700;">DEM-2026-0118</span></td>
+                    <td><span style="font-size: 12px; background: #F1F5F9; color: #475569; padding: 2px 8px; border-radius: 99px; font-weight: 600;">Zone physique</span></td>
+                    <td style="max-width: 220px;"><span style="font-size: 13px; color: #0F172A; font-weight: 500;">Salle Serveurs – Bâtiment A</span></td>
+                    <td><span style="font-size: 13px; color: #64748B;">Youssef Tazi</span></td>
+                    <td><span class="badge" style="background: #EFF6FF; color: #1D4ED8;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #3B82F6; display: inline-block;"></span>Exécutée</span></td>
+                    <td><span style="font-size: 12px; color: #94A3B8;">14 juin 2026</span></td>
+                    <td>
+                        <div style="display: flex; gap: 4px; justify-content: flex-end;">
+                            <a href="#" class="btn-secondary" style="font-size: 12px; padding: 5px 10px;">👁️ Détails</a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <div style="padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #F1F5F9;">
+            <span style="font-size: 13px; color: #64748B;">Affichage de 1 à 8 sur 8 demandes</span>
+            <div style="display: flex; gap: 4px;">
+                <button style="width: 32px; height: 32px; border: 1px solid #E2E8F0; border-radius: 6px; cursor: pointer; background: #fff; color: #475569; font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center;">←</button>
+                <button style="width: 32px; height: 32px; border: 1px solid #E2E8F0; border-radius: 6px; cursor: pointer; background: #0EA5E9; color: #fff; font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center;">1</button>
+                <button style="width: 32px; height: 32px; border: 1px solid #E2E8F0; border-radius: 6px; cursor: pointer; background: #fff; color: #475569; font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center;">2</button>
+                <button style="width: 32px; height: 32px; border: 1px solid #E2E8F0; border-radius: 6px; cursor: pointer; background: #fff; color: #475569; font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center;">3</button>
+                <button style="width: 32px; height: 32px; border: 1px solid #E2E8F0; border-radius: 6px; cursor: pointer; background: #fff; color: #475569; font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center;">→</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

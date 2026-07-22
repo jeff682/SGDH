@@ -1,0 +1,152 @@
+{% extends "sgdh/shell.html" %}
+
+{% block page_title %}Gestion des utilisateurs{% endblock %}
+
+{% block page_content %}
+<div>
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
+        <div>
+            <h1 style="font-size: 22px; font-weight: 800; color: #0F172A; margin: 0;">Gestion des utilisateurs</h1>
+            <p style="color: #64748B; font-size: 14px; margin-top: 4px;">7 utilisateurs enregistrés</p>
+        </div>
+        <button class="btn-primary" onclick="document.getElementById('userModal').style.display='flex'" style="display: flex; align-items: center; gap: 6px;">
+            ➕ Ajouter un utilisateur
+        </button>
+    </div>
+
+    <!-- Filters -->
+    <div class="card" style="padding: 14px 20px; margin-bottom: 16px; display: flex; gap: 12px; align-items: center;">
+        <div style="position: relative; flex: 1; max-width: 280px;">
+            <div style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #94A3B8;">
+                <span style="font-size: 14px;">🔍</span>
+            </div>
+            <input class="form-input" placeholder="Rechercher un utilisateur…" style="padding-left: 32px; height: 36px; font-size: 13px;">
+        </div>
+        <select class="form-input" style="height: 36px; font-size: 13px; width: auto;">
+            <option>Tous les rôles</option>
+            <option>Super Admin</option>
+            <option>RSSI</option>
+            <option>Responsable IT</option>
+            <option>Demandeur</option>
+        </select>
+        <select class="form-input" style="height: 36px; font-size: 13px; width: auto;">
+            <option>Tous les statuts</option>
+            <option>Actif</option>
+            <option>Inactif</option>
+        </select>
+    </div>
+
+    <div class="card">
+        <table>
+            <thead>
+                <tr>
+                    <th>Utilisateur</th>
+                    <th>Rôle</th>
+                    <th>Département</th>
+                    <th>Statut</th>
+                    <th>Dernière connexion</th>
+                    <th>Demandes</th>
+                    <th style="text-align: right;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for u in users %}
+                <tr>
+                    <td>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div style="width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, {{ u.color }}, {{ u.color }}88); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #fff; flex-shrink: 0;">{{ u.avatar }}</div>
+                            <div>
+                                <div style="font-size: 14px; font-weight: 600; color: #0F172A;">{{ u.name }}</div>
+                                <div style="font-size: 12px; color: #94A3B8;">{{ u.email }}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <span style="font-size: 12px; padding: 3px 10px; border-radius: 99px; font-weight: 700; background: {{ u.color }}18; color: {{ u.color }};">{{ u.role }}</span>
+                    </td>
+                    <td><span style="font-size: 13px; color: #475569;">{{ u.dept }}</span></td>
+                    <td>
+                        <span class="badge" style="background: {% if u.status == 'actif' %}#F0FDF4{% else %}#F8FAFC{% endif %}; color: {% if u.status == 'actif' %}#15803D{% else %}#94A3B8{% endif %};">
+                            <span style="width: 6px; height: 6px; border-radius: 50%; background: {% if u.status == 'actif' %}#22C55E{% else %}#CBD5E1{% endif %}; display: inline-block;"></span>
+                            {% if u.status == 'actif' %}Actif{% else %}Inactif{% endif %}
+                        </span>
+                    </td>
+                    <td><span style="font-size: 12px; color: #64748B;">{{ u.last_login }}</span></td>
+                    <td>
+                        <span style="font-size: 13px; font-weight: 700; color: #0F172A;">{{ u.requests }}</span>
+                        <span style="font-size: 12px; color: #94A3B8;"> demandes</span>
+                    </td>
+                    <td>
+                        <div style="display: flex; gap: 4px; justify-content: flex-end;">
+                            <a href="#" class="btn-secondary" style="font-size: 12px; padding: 5px 8px; color: #64748B;">✏️</a>
+                            <a href="#" class="btn-secondary" style="font-size: 12px; padding: 5px 8px; color: #64748B;">🚫</a>
+                            <a href="#" class="btn-danger" style="font-size: 12px; padding: 5px 8px;">🗑️</a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal -->
+    <div id="userModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45); align-items: center; justify-content: center; z-index: 1000;">
+        <div class="card" style="width: 520px; padding: 32px; margin: 20px; max-height: 90vh; overflow-y: auto;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
+                <h2 style="font-size: 18px; font-weight: 700; color: #0F172A; margin: 0;">Ajouter un utilisateur</h2>
+                <button onclick="document.getElementById('userModal').style.display='none'" style="background: none; border: none; cursor: pointer; color: #94A3B8; display: flex; font-size: 20px;">✕</button>
+            </div>
+            <form method="post" action="{% url 'sgdh:users' %}">
+                {% csrf_token %}
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+                    <div>
+                        <label class="form-label">Prénom</label>
+                        <input class="form-input" name="first_name" placeholder="Prénom">
+                    </div>
+                    <div>
+                        <label class="form-label">Nom</label>
+                        <input class="form-input" name="last_name" placeholder="Nom de famille">
+                    </div>
+                    <div>
+                        <label class="form-label">Email professionnel</label>
+                        <input class="form-input" type="email" name="email" placeholder="p.nom@entreprise.ma">
+                    </div>
+                    <div>
+                        <label class="form-label">Matricule</label>
+                        <input class="form-input" name="employee_id" placeholder="EMP-0000">
+                    </div>
+                    <div>
+                        <label class="form-label">Rôle</label>
+                        <select class="form-input" name="role">
+                            <option>Demandeur</option>
+                            <option>Responsable hiérarchique</option>
+                            <option>Propriétaire ressource</option>
+                            <option>RSSI</option>
+                            <option>Admin Habilitations</option>
+                            <option>Super Admin</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="form-label">Département</label>
+                        <select class="form-input" name="department">
+                            <option>DSI</option>
+                            <option>RH</option>
+                            <option>Finance</option>
+                            <option>Sécurité SI</option>
+                            <option>Infrastructure</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; padding: 10px 12px; background: #F8FAFC; border-radius: 8px; border: 1px solid #E2E8F0; margin-bottom: 20px;">
+                    <input type="checkbox" id="sendInvite" checked style="accent-color: #0EA5E9;">
+                    <label for="sendInvite" style="font-size: 13px; color: #334155; cursor: pointer;">Envoyer un email d'invitation avec lien d'activation</label>
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                    <button type="button" class="btn-secondary" onclick="document.getElementById('userModal').style.display='none'">Annuler</button>
+                    <button type="submit" class="btn-primary">Créer l'utilisateur</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,184 @@
+{% extends "sgdh/shell.html" %}
+
+{% block page_title %}Workflow Builder{% endblock %}
+
+{% block page_content %}
+<div>
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
+        <div>
+            <h1 style="font-size: 22px; font-weight: 800; color: #0F172A; margin: 0;">Workflow Builder</h1>
+            <p style="color: #64748B; font-size: 14px; margin-top: 4px;">Configurez le circuit de validation hiérarchique</p>
+        </div>
+        <div style="display: flex; gap: 10px;">
+            <button class="btn-secondary" style="font-size: 13px;">Annuler les modifications</button>
+            <button class="btn-primary" style="font-size: 13px;">Publier le workflow</button>
+        </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 300px; gap: 20px;">
+        <!-- Canvas -->
+        <div class="card" style="padding: 32px; min-height: 500px;">
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <!-- Step: Soumission -->
+                <div class="workflow-node" style="max-width: 320px; width: 100%;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                        <div style="width: 10px; height: 10px; border-radius: 50%; background: #0EA5E9; flex-shrink: 0;"></div>
+                        <span style="font-size: 10px; font-weight: 700; color: #0EA5E9; text-transform: uppercase; letter-spacing: 0.06em;">Démarrage</span>
+                    </div>
+                    <div style="font-size: 14px; font-weight: 700; color: #0F172A;">Soumission</div>
+                    <div style="font-size: 12px; color: #64748B; margin-top: 4px; display: flex; align-items: center; gap: 5px;">
+                        <span style="font-size: 12px;">👤</span> Demandeur
+                    </div>
+                    <div style="margin-top: 10px; display: flex; gap: 6px;">
+                        <span style="font-size: 10px; background: #F1F5F9; color: #475569; padding: 2px 8px; border-radius: 99px; font-weight: 600;">Étape 1/6</span>
+                    </div>
+                </div>
+
+                <div class="workflow-connector"></div>
+
+                <!-- Step: Validation N+1 -->
+                <div class="workflow-node" style="max-width: 320px; width: 100%;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                        <div style="width: 10px; height: 10px; border-radius: 50%; background: #7C3AED; flex-shrink: 0;"></div>
+                        <span style="font-size: 10px; font-weight: 700; color: #7C3AED; text-transform: uppercase; letter-spacing: 0.06em;">Validation</span>
+                        <button style="margin-left: auto; background: none; border: none; cursor: pointer; color: #CBD5E1; padding: 2px; border-radius: 4px; display: flex;"><span style="font-size: 12px;">✕</span></button>
+                    </div>
+                    <div style="font-size: 14px; font-weight: 700; color: #0F172A;">Validation N+1</div>
+                    <div style="font-size: 12px; color: #64748B; margin-top: 4px; display: flex; align-items: center; gap: 5px;">
+                        <span style="font-size: 12px;">👤</span> Responsable hiérarchique
+                    </div>
+                    <div style="margin-top: 10px; display: flex; gap: 6px;">
+                        <span style="font-size: 10px; background: #F1F5F9; color: #475569; padding: 2px 8px; border-radius: 99px; font-weight: 600;">Étape 2/6</span>
+                        <span style="font-size: 10px; background: #FFF7ED; color: #C2410C; padding: 2px 8px; border-radius: 99px; font-weight: 600;">Délai max: 48h</span>
+                    </div>
+                </div>
+
+                <div class="workflow-connector"></div>
+
+                <!-- Step: Vérification ressource -->
+                <div class="workflow-node" style="max-width: 320px; width: 100%;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                        <div style="width: 10px; height: 10px; border-radius: 50%; background: #F59E0B; flex-shrink: 0;"></div>
+                        <span style="font-size: 10px; font-weight: 700; color: #F59E0B; text-transform: uppercase; letter-spacing: 0.06em;">Validation</span>
+                        <button style="margin-left: auto; background: none; border: none; cursor: pointer; color: #CBD5E1; padding: 2px; border-radius: 4px; display: flex;"><span style="font-size: 12px;">✕</span></button>
+                    </div>
+                    <div style="font-size: 14px; font-weight: 700; color: #0F172A;">Vérification ressource</div>
+                    <div style="font-size: 12px; color: #64748B; margin-top: 4px; display: flex; align-items: center; gap: 5px;">
+                        <span style="font-size: 12px;">👤</span> Propriétaire de la ressource
+                    </div>
+                    <div style="margin-top: 10px; display: flex; gap: 6px;">
+                        <span style="font-size: 10px; background: #F1F5F9; color: #475569; padding: 2px 8px; border-radius: 99px; font-weight: 600;">Étape 3/6</span>
+                        <span style="font-size: 10px; background: #FFF7ED; color: #C2410C; padding: 2px 8px; border-radius: 99px; font-weight: 600;">Délai max: 48h</span>
+                    </div>
+                </div>
+
+                <div class="workflow-connector"></div>
+
+                <!-- Step: Avis sécurité RSSI -->
+                <div class="workflow-node" style="max-width: 320px; width: 100%;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                        <div style="width: 10px; height: 10px; border-radius: 50%; background: #EF4444; flex-shrink: 0;"></div>
+                        <span style="font-size: 10px; font-weight: 700; color: #EF4444; text-transform: uppercase; letter-spacing: 0.06em;">Validation</span>
+                        <button style="margin-left: auto; background: none; border: none; cursor: pointer; color: #CBD5E1; padding: 2px; border-radius: 4px; display: flex;"><span style="font-size: 12px;">✕</span></button>
+                    </div>
+                    <div style="font-size: 14px; font-weight: 700; color: #0F172A;">Avis sécurité RSSI</div>
+                    <div style="font-size: 12px; color: #64748B; margin-top: 4px; display: flex; align-items: center; gap: 5px;">
+                        <span style="font-size: 12px;">👤</span> RSSI / Équipe SSI
+                    </div>
+                    <div style="margin-top: 10px; display: flex; gap: 6px;">
+                        <span style="font-size: 10px; background: #F1F5F9; color: #475569; padding: 2px 8px; border-radius: 99px; font-weight: 600;">Étape 4/6</span>
+                        <span style="font-size: 10px; background: #FFF7ED; color: #C2410C; padding: 2px 8px; border-radius: 99px; font-weight: 600;">Délai max: 48h</span>
+                    </div>
+                </div>
+
+                <div class="workflow-connector"></div>
+
+                <!-- Step: Exécution -->
+                <div class="workflow-node" style="max-width: 320px; width: 100%;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                        <div style="width: 10px; height: 10px; border-radius: 50%; background: #10B981; flex-shrink: 0;"></div>
+                        <span style="font-size: 10px; font-weight: 700; color: #10B981; text-transform: uppercase; letter-spacing: 0.06em;">Action</span>
+                    </div>
+                    <div style="font-size: 14px; font-weight: 700; color: #0F172A;">Exécution habilitation</div>
+                    <div style="font-size: 12px; color: #64748B; margin-top: 4px; display: flex; align-items: center; gap: 5px;">
+                        <span style="font-size: 12px;">👤</span> Administrateur IAM
+                    </div>
+                    <div style="margin-top: 10px; display: flex; gap: 6px;">
+                        <span style="font-size: 10px; background: #F1F5F9; color: #475569; padding: 2px 8px; border-radius: 99px; font-weight: 600;">Étape 5/6</span>
+                    </div>
+                </div>
+
+                <div class="workflow-connector"></div>
+
+                <!-- Step: Notification -->
+                <div class="workflow-node" style="max-width: 320px; width: 100%;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                        <div style="width: 10px; height: 10px; border-radius: 50%; background: #64748B; flex-shrink: 0;"></div>
+                        <span style="font-size: 10px; font-weight: 700; color: #64748B; text-transform: uppercase; letter-spacing: 0.06em;">Fin</span>
+                    </div>
+                    <div style="font-size: 14px; font-weight: 700; color: #0F172A;">Notification & archivage</div>
+                    <div style="font-size: 12px; color: #64748B; margin-top: 4px; display: flex; align-items: center; gap: 5px;">
+                        <span style="font-size: 12px;">🤖</span> Système automatique
+                    </div>
+                    <div style="margin-top: 10px; display: flex; gap: 6px;">
+                        <span style="font-size: 10px; background: #F1F5F9; color: #475569; padding: 2px 8px; border-radius: 99px; font-weight: 600;">Étape 6/6</span>
+                    </div>
+                </div>
+
+                <button style="margin-top: 16px; background: #F0F9FF; border: 2px dashed #BAE6FD; border-radius: 8px; padding: 8px 20px; cursor: pointer; font-size: 13px; font-weight: 700; color: #0EA5E9; display: flex; align-items: center; gap: 6px;">
+                    ➕ Insérer une étape
+                </button>
+            </div>
+        </div>
+
+        <!-- Properties panel -->
+        <div>
+            <div class="card" style="padding: 20px; margin-bottom: 14px;">
+                <div style="font-size: 13px; font-weight: 700; color: #0F172A; margin-bottom: 14px;">Propriétés de l'étape</div>
+                <div style="display: flex; flex-direction: column; gap: 14px;">
+                    <div>
+                        <label class="form-label">Titre</label>
+                        <input class="form-input" value="Validation N+1">
+                    </div>
+                    <div>
+                        <label class="form-label">Rôle validateur</label>
+                        <input class="form-input" value="Responsable hiérarchique">
+                    </div>
+                    <div>
+                        <label class="form-label">Type</label>
+                        <select class="form-input">
+                            <option>Validation</option>
+                            <option>Action automatique</option>
+                            <option>Condition</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="form-label">Délai maximum</label>
+                        <select class="form-input">
+                            <option>24 heures</option>
+                            <option selected>48 heures</option>
+                            <option>72 heures</option>
+                            <option>5 jours ouvrés</option>
+                        </select>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px; padding: 10px 12px; background: #F8FAFC; border-radius: 8px; border: 1px solid #E2E8F0;">
+                        <input type="checkbox" id="notif" checked style="accent-color: #0EA5E9;">
+                        <label for="notif" style="font-size: 13px; color: #334155; cursor: pointer;">Notification par email</label>
+                    </div>
+                    <button class="btn-primary" style="font-size: 13px;">Appliquer</button>
+                </div>
+            </div>
+
+            <div class="card" style="padding: 20px;">
+                <div style="font-size: 13px; font-weight: 700; color: #0F172A; margin-bottom: 12px;">Workflows disponibles</div>
+                {% for wf in workflows %}
+                    <div style="padding: 8px 0; border-bottom: 1px solid #F1F5F9; display: flex; align-items: center; justify-content: space-between;">
+                        <span style="font-size: 13px; color: #334155;">{{ wf }}</span>
+                        <button style="background: none; border: 1px solid #E2E8F0; border-radius: 6px; padding: 4px 10px; font-size: 12px; cursor: pointer; color: #0EA5E9; font-weight: 600;">Charger</button>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

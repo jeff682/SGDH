@@ -1,0 +1,168 @@
+{% extends "sgdh/shell.html" %}
+
+{% block page_title %}Nouvelle demande{% endblock %}
+
+{% block page_content %}
+<div style="max-width: 760px; margin: 0 auto;">
+    <div style="margin-bottom: 28px;">
+        <h1 style="font-size: 22px; font-weight: 800; color: #0F172A; margin: 0;">Nouvelle demande d'habilitation</h1>
+        <p style="color: #64748B; font-size: 14px; margin-top: 4px;">Complétez les étapes pour soumettre votre demande d'accès</p>
+    </div>
+
+    <!-- Stepper -->
+    <div style="display: flex; align-items: center; margin-bottom: 32px;">
+        {% for step_num, step_label in steps %}
+            <div style="display: flex; align-items: center; flex: {% if not forloop.last %}1{% else %}0{% endif %};">
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer;" onclick="setStep({{ step_num }})">
+                    <div style="width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; background: {% if step_num > current_step %}#0EA5E9{% elif step_num == current_step %}#0EA5E9{% else %}#E2E8F0{% endif %}; color: {% if step_num >= current_step %}#fff{% else %}#94A3B8{% endif %}; box-shadow: {% if step_num == current_step %}0 0 0 4px rgba(14,165,233,0.18){% else %}none{% endif %}; transition: all 0.2s;">
+                        {% if step_num < current_step %}✓{% else %}{{ step_num }}{% endif %}
+                    </div>
+                    <span style="font-size: 11px; font-weight: 600; color: {% if step_num >= current_step %}#0EA5E9{% else %}#94A3B8{% endif %}; white-space: nowrap;">{{ step_label }}</span>
+                </div>
+                {% if not forloop.last %}
+                    <div style="flex: 1; height: 2px; background: {% if step_num > current_step %}#0EA5E9{% else %}#E2E8F0{% endif %}; margin: 0 12px; margin-bottom: 22px; transition: background 0.3s;"></div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="card" style="padding: 32px;">
+        <form method="post" action="{% url 'sgdh:new_request' %}">
+            {% csrf_token %}
+
+            {% if current_step == 1 %}
+            <div>
+                <h3 style="font-size: 16px; font-weight: 700; color: #0F172A; margin-bottom: 20px;">Type de demande</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 24px;">
+                    {% for choice in request_types %}
+                        <label style="border: 2px solid {% if selected_type == choice %}#0EA5E9{% else %}#E2E8F0{% endif %}; border-radius: 10px; padding: 16px 12px; cursor: pointer; text-align: center; background: {% if selected_type == choice %}#F0F9FF{% else %}#fff{% endif %}; transition: all 0.15s; display: block;">
+                            <input type="radio" name="request_type" value="{{ choice }}" style="display: none;" {% if selected_type == choice %}checked{% endif %} onchange="this.form.submit()">
+                            <div style="margin-bottom: 8px; font-size: 22px;">
+                                {% if choice == 'Application' %}💻{% elif choice == 'Dossier réseau' %}📁{% else %}🛡️{% endif %}
+                            </div>
+                            <div style="font-size: 13px; font-weight: 600; color: {% if selected_type == choice %}#0369A1{% else %}#334155{% endif %};">{{ choice }}</div>
+                        </label>
+                    {% endfor %}
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+                    <div>
+                        <label class="form-label">Demandeur</label>
+                        <input class="form-input" value="{% if user.is_authenticated %}{{ user.get_full_name }}{% endif %}" readonly style="background: #F8FAFC; color: #64748B;">
+                    </div>
+                    <div>
+                        <label class="form-label">Département</label>
+                        <input class="form-input" value="{% if user.is_authenticated %}{{ user.service|default:"Direction des Systèmes d'Information" }}{% endif %}" readonly style="background: #F8FAFC; color: #64748B;">
+                    </div>
+                    <div>
+                        <label class="form-label">Date de besoin</label>
+                        <input class="form-input" type="date" name="need_date" value="2026-08-01">
+                    </div>
+                    <div>
+                        <label class="form-label">Durée souhaitée</label>
+                        <select class="form-input" name="duration">
+                            <option>Permanente</option>
+                            <option>6 mois</option>
+                            <option>1 an</option>
+                            <option>Temporaire (à préciser)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            {% elif current_step == 2 %}
+            <div>
+                <h3 style="font-size: 16px; font-weight: 700; color: #0F172A; margin-bottom: 20px;">Ressource et niveau d'accès</h3>
+                <div style="margin-bottom: 18px;">
+                    <label class="form-label">Rechercher la ressource</label>
+                    <div style="position: relative;">
+                        <div style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #94A3B8; pointer-events: none;">
+                            <span style="font-size: 15px;">🔍</span>
+                        </div>
+                        <input class="form-input" placeholder="Ex: SAP ERP, //SRV-RH, Datacenter DC-01…" style="padding-left: 38px;" name="resource">
+                    </div>
+                </div>
+                <div style="margin-bottom: 18px;">
+                    <label class="form-label">Niveau d'accès souhaité</label>
+                    <div style="display: flex; gap: 10px;">
+                        {% for level in access_levels %}
+                            <label style="flex: 1; padding: 10px 8px; border: 2px solid {% if selected_level == level %}#0EA5E9{% else %}#E2E8F0{% endif %}; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600; background: {% if selected_level == level %}#F0F9FF{% else %}#fff{% endif %}; color: {% if selected_level == level %}#0369A1{% else %}#475569{% endif %}; text-align: center; transition: all 0.15s; display: block;">
+                                <input type="radio" name="access_level" value="{{ level }}" style="display: none;" {% if selected_level == level %}checked{% endif %}>
+                                {{ level }}
+                            </label>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div>
+                    <label class="form-label">Périmètre spécifique (optionnel)</label>
+                    <input class="form-input" name="scope" placeholder="Ex: données exercice 2026, sous-dossier RH…">
+                </div>
+            </div>
+
+            {% elif current_step == 3 %}
+            <div>
+                <h3 style="font-size: 16px; font-weight: 700; color: #0F172A; margin-bottom: 20px;">Justification et pièces jointes</h3>
+                <div style="margin-bottom: 20px;">
+                    <label class="form-label">Motif de la demande <span style="color: #EF4444;">*</span></label>
+                    <textarea class="form-input" rows="5" name="justification" placeholder="Décrivez précisément le besoin métier justifiant cet accès, les tâches qui nécessitent cet accès et la durée prévue d'utilisation…" style="resize: vertical; min-height: 120px;"></textarea>
+                    <div style="font-size: 12px; color: #94A3B8; margin-top: 4px; text-align: right;">Minimum 50 caractères requis</div>
+                </div>
+                <div>
+                    <label class="form-label">Pièces jointes</label>
+                    <div style="border: 2px dashed #CBD5E1; border-radius: 10px; padding: 32px 24px; text-align: center; background: #F8FAFC; cursor: pointer; transition: all 0.2s;">
+                        <div style="margin-bottom: 10px; font-size: 28px; color: #94A3B8;">📎</div>
+                        <div style="font-size: 14px; font-weight: 600; color: #334155;">Glissez-déposez vos fichiers ici</div>
+                        <div style="font-size: 12px; color: #94A3B8; margin-top: 4px;">ou <span style="color: #0EA5E9; font-weight: 600;">parcourez vos fichiers</span></div>
+                        <div style="font-size: 11px; color: #CBD5E1; margin-top: 8px;">PDF, DOCX, PNG — 10 Mo max</div>
+                    </div>
+                </div>
+            </div>
+
+            {% elif current_step == 4 %}
+            <div>
+                <h3 style="font-size: 16px; font-weight: 700; color: #0F172A; margin-bottom: 20px;">Récapitulatif de la demande</h3>
+                <div style="background: #F8FAFC; border-radius: 10px; padding: 20px; margin-bottom: 20px; border: 1px solid #E2E8F0;">
+                    <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #E2E8F0;">
+                        <span style="font-size: 13px; color: #64748B; font-weight: 500;">Demandeur</span>
+                        <span style="font-size: 13px; color: #0F172A; font-weight: 600;">{% if user.is_authenticated %}{{ user.get_full_name }} — {{ user.service|default:"Direction SI" }}{% endif %}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #E2E8F0;">
+                        <span style="font-size: 13px; color: #64748B; font-weight: 500;">Type de demande</span>
+                        <span style="font-size: 13px; color: #0F172A; font-weight: 600;">{{ selected_type|default:"Application" }}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #E2E8F0;">
+                        <span style="font-size: 13px; color: #64748B; font-weight: 500;">Niveau d'accès</span>
+                        <span style="font-size: 13px; color: #0F172A; font-weight: 600;">{{ selected_level|default:"Lecture" }}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #E2E8F0;">
+                        <span style="font-size: 13px; color: #64748B; font-weight: 500;">Durée</span>
+                        <span style="font-size: 13px; color: #0F172A; font-weight: 600;">Permanente</span>
+                    </div>
+                </div>
+                <div style="background: #FFFBEB; border: 1px solid #FDE68A; border-radius: 8px; padding: 12px 16px; display: flex; gap: 10px; align-items: flex-start;">
+                    <span style="font-size: 16px;">⚠️</span>
+                    <div style="font-size: 13px; color: #92400E;">
+                        Cette demande sera soumise au circuit de validation : <strong>N+1 → Propriétaire ressource → RSSI</strong>. Délai de traitement estimé : <strong>3–5 jours ouvrés</strong>.
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <div style="display: flex; justify-content: space-between; margin-top: 28px; padding-top: 20px; border-top: 1px solid #F1F5F9;">
+                <div>
+                    {% if current_step > 1 %}
+                        <button type="submit" name="step" value="{{ current_step|add:'-1' }}" class="btn-secondary">← Précédent</button>
+                    {% endif %}
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit" name="action" value="draft" class="btn-secondary">Enregistrer en brouillon</button>
+                    {% if current_step < 4 %}
+                        <button type="submit" name="step" value="{{ current_step|add:'1' }}" class="btn-primary">Suivant →</button>
+                    {% else %}
+                        <button type="submit" name="action" value="submit" class="btn-primary" style="background: #10B981;">✓ Soumettre la demande</button>
+                    {% endif %}
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

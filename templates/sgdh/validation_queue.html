@@ -1,0 +1,110 @@
+{% extends "sgdh/shell.html" %}
+
+{% block page_title %}File de validation{% endblock %}
+
+{% block page_content %}
+<div>
+    <div style="margin-bottom: 24px;">
+        <h1 style="font-size: 22px; font-weight: 800; color: #0F172A; margin: 0;">File de validation</h1>
+        <p style="color: #64748B; font-size: 14px; margin-top: 4px;">3 demandes en attente de votre décision</p>
+    </div>
+
+    <!-- Summary chips -->
+    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+        <button style="padding: 6px 14px; border-radius: 99px; border: 1.5px solid #0EA5E9; cursor: pointer; font-size: 13px; font-weight: 600; background: #EFF6FF; color: #0369A1; display: flex; align-items: center; gap: 6px;">
+            Toutes <span style="background: #0EA5E9; color: #fff; border-radius: 99px; padding: 0 6px; font-size: 11px; font-weight: 700;">3</span>
+        </button>
+        <button style="padding: 6px 14px; border-radius: 99px; border: 1.5px solid #E2E8F0; cursor: pointer; font-size: 13px; font-weight: 600; background: #fff; color: #475569; display: flex; align-items: center; gap: 6px;">
+            Urgentes <span style="background: #EF4444; color: #fff; border-radius: 99px; padding: 0 6px; font-size: 11px; font-weight: 700;">2</span>
+        </button>
+        <button style="padding: 6px 14px; border-radius: 99px; border: 1.5px solid #E2E8F0; cursor: pointer; font-size: 13px; font-weight: 600; background: #fff; color: #475569; display: flex; align-items: center; gap: 6px;">
+            Dans les délais <span style="background: #22C55E; color: #fff; border-radius: 99px; padding: 0 6px; font-size: 11px; font-weight: 700;">1</span>
+        </button>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+        <!-- Validation item 1 -->
+        <div class="card" style="padding: 22px; border-left: 3px solid #0EA5E9;">
+            <div style="display: flex; align-items: flex-start; gap: 14px;">
+                <div style="width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, #0EA5E9, #7C3AED); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: #fff; flex-shrink: 0;">ML</div>
+                <div style="flex: 1; min-width: 0;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px; flex-wrap: wrap;">
+                        <span style="font-family: monospace; font-size: 12px; color: #0EA5E9; font-weight: 700;">DEM-2026-0143</span>
+                        <span style="font-size: 12px; background: #F1F5F9; color: #475569; padding: 1px 8px; border-radius: 99px; font-weight: 600;">Application</span>
+                    </div>
+                    <div style="font-size: 15px; font-weight: 700; color: #0F172A; margin-bottom: 2px;">Oracle DB – Schéma PROD</div>
+                    <div style="font-size: 13px; color: #475569; margin-bottom: 6px;"><strong>Mehdi Lahlou</strong> · DBA Senior</div>
+                    <div style="font-size: 13px; color: #64748B; line-height: 1.5; margin-bottom: 12px; background: #F8FAFC; padding: 8px 12px; border-radius: 6;">
+                        Migration base de données vers Oracle 21c – accès nécessaire pour export schéma et comparaison des objets.
+                    </div>
+                    <div style="display: flex; gap: 16px; font-size: 12px; color: #94A3B8; margin-bottom: 14px;">
+                        <span>🕐 Soumis il y a 2 h</span>
+                        <span style="color: #64748B;">📅 Délai : 21 juil. 2026</span>
+                    </div>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <a href="#" class="btn-success"><span style="display: flex; align-items: center; gap: 5px;">✅ Approuver</span></a>
+                        <a href="#" class="btn-danger"><span style="display: flex; align-items: center; gap: 5px;">❌ Rejeter</span></a>
+                        <a href="#" class="btn-warning"><span style="display: flex; align-items: center; gap: 5px;">📧 Demander complément</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Validation item 2 -->
+        <div class="card" style="padding: 22px; border-left: 3px solid #EF4444;">
+            <div style="display: flex; align-items: flex-start; gap: 14px;">
+                <div style="width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, #EF4444, #F97316); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: #fff; flex-shrink: 0;">NB</div>
+                <div style="flex: 1; min-width: 0;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px; flex-wrap: wrap;">
+                        <span style="font-family: monospace; font-size: 12px; color: #0EA5E9; font-weight: 700;">DEM-2026-0140</span>
+                        <span style="font-size: 12px; background: #F1F5F9; color: #475569; padding: 1px 8px; border-radius: 99px; font-weight: 600;">Zone physique</span>
+                        <span class="badge" style="background: #FEF2F2; color: #B91C1C;"><span style="font-size: 11px;">🚨</span> URGENT</span>
+                    </div>
+                    <div style="font-size: 15px; font-weight: 700; color: #0F172A; margin-bottom: 2px;">Salle Câblage – Bâtiment B3</div>
+                    <div style="font-size: 13px; color: #475569; margin-bottom: 6px;"><strong>Nadia Benchekroun</strong> · Technicienne Réseau</div>
+                    <div style="font-size: 13px; color: #64748B; line-height: 1.5; margin-bottom: 12px; background: #F8FAFC; padding: 8px 12px; border-radius: 6;">
+                        Intervention urgente sur le patch panel défaillant suite à la panne réseau du 18/07.
+                    </div>
+                    <div style="display: flex; gap: 16px; font-size: 12px; color: #94A3B8; margin-bottom: 14px;">
+                        <span>🕐 Soumis il y a 4 h</span>
+                        <span style="color: #EF4444;">📅 Délai : 19 juil. 2026</span>
+                    </div>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <a href="#" class="btn-success"><span style="display: flex; align-items: center; gap: 5px;">✅ Approuver</span></a>
+                        <a href="#" class="btn-danger"><span style="display: flex; align-items: center; gap: 5px;">❌ Rejeter</span></a>
+                        <a href="#" class="btn-warning"><span style="display: flex; align-items: center; gap: 5px;">📧 Demander complément</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Validation item 3 -->
+        <div class="card" style="padding: 22px; border-left: 3px solid #EF4444;">
+            <div style="display: flex; align-items: flex-start; gap: 14px;">
+                <div style="width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, #EF4444, #F97316); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: #fff; flex-shrink: 0;">RQ</div>
+                <div style="flex: 1; min-width: 0;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px; flex-wrap: wrap;">
+                        <span style="font-family: monospace; font-size: 12px; color: #0EA5E9; font-weight: 700;">DEM-2026-0137</span>
+                        <span style="font-size: 12px; background: #F1F5F9; color: #475569; padding: 1px 8px; border-radius: 99px; font-weight: 600;">Dossier réseau</span>
+                        <span class="badge" style="background: #FEF2F2; color: #B91C1C;"><span style="font-size: 11px;">🚨</span> URGENT</span>
+                    </div>
+                    <div style="font-size: 15px; font-weight: 700; color: #0F172A; margin-bottom: 2px;">//SRV-RH/Paie2026</div>
+                    <div style="font-size: 13px; color: #475569; margin-bottom: 6px;"><strong>Rachid Qorchi</strong> · Gestionnaire RH</div>
+                    <div style="font-size: 13px; color: #64748B; line-height: 1.5; margin-bottom: 12px; background: #F8FAFC; padding: 8px 12px; border-radius: 6;">
+                        Clôture de paie mensuelle de juillet. Accès en lecture aux bulletins de salaire du personnel.
+                    </div>
+                    <div style="display: flex; gap: 16px; font-size: 12px; color: #94A3B8; margin-bottom: 14px;">
+                        <span>🕐 Soumis il y a 1 j</span>
+                        <span style="color: #EF4444;">📅 Délai : 20 juil. 2026</span>
+                    </div>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <a href="#" class="btn-success"><span style="display: flex; align-items: center; gap: 5px;">✅ Approuver</span></a>
+                        <a href="#" class="btn-danger"><span style="display: flex; align-items: center; gap: 5px;">❌ Rejeter</span></a>
+                        <a href="#" class="btn-warning"><span style="display: flex; align-items: center; gap: 5px;">📧 Demander complément</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

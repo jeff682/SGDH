@@ -1,0 +1,63 @@
+{% extends "sgdh/shell.html" %}
+
+{% block page_title %}Paramètres{% endblock %}
+
+{% block page_content %}
+<div>
+    <div style="margin-bottom: 24px;">
+        <h1 style="font-size: 22px; font-weight: 800; color: #0F172A; margin: 0;">Paramètres du système</h1>
+        <p style="color: #64748B; font-size: 14px; margin-top: 4px;">Configuration générale de l'application SGDH</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <div class="card" style="padding: 22px;">
+            <h3 style="font-size: 14px; font-weight: 700; color: #0F172A; margin-bottom: 16px;">Informations générales</h3>
+            <div style="display: flex; flex-direction: column; gap: 14px;">
+                <div>
+                    <label class="form-label">Nom de l'application</label>
+                    <input class="form-input" value="SGDH v2.1" readonly style="background: #F8FAFC; color: #64748B;">
+                </div>
+                <div>
+                    <label class="form-label">Organisation</label>
+                    <input class="form-input" value="Entreprise XYZ" readonly style="background: #F8FAFC; color: #64748B;">
+                </div>
+                <div>
+                    <label class="form-label">Fuseau horaire</label>
+                    <input class="form-input" value="Africa/Algiers (UTC+1)" readonly style="background: #F8FAFC; color: #64748B;">
+                </div>
+                <div>
+                    <label class="form-label">Langue par défaut</label>
+                    <input class="form-input" value="Français (fr-fr)" readonly style="background: #F8FAFC; color: #64748B;">
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="padding: 22px;">
+            <h3 style="font-size: 14px; font-weight: 700; color: #0F172A; margin-bottom: 16px;">Sécurité</h3>
+            <div style="display: flex; flex-direction: column; gap: 14px;">
+                <div>
+                    <label class="form-label">Durée de session (heures)</label>
+                    <input class="form-input" type="number" value="2">
+                </div>
+                <div>
+                    <label class="form-label">Nombre max de tentatives de connexion</label>
+                    <input class="form-input" type="number" value="5">
+                </div>
+                <div>
+                    <label class="form-label">Authentification à deux facteurs (2FA)</label>
+                    <select class="form-input">
+                        <option>Obligatoire pour tous</option>
+                        <option>Optionnelle</option>
+                        <option>Désactivée</option>
+                    </select>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; padding: 10px 12px; background: #F8FAFC; border-radius: 8px; border: 1px solid #E2E8F0;">
+                    <input type="checkbox" id="ssl" checked style="accent-color: #0EA5E9;">
+                    <label for="ssl" style="font-size: 13px; color: #334155; cursor: pointer;">Forcer HTTPS</label>
+                </div>
+                <button class="btn-primary" style="font-size: 13px;">Enregistrer les paramètres</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
