@@ -1,0 +1,53 @@
+# Django
+*.log
+*.pot
+*.pyc
+__pycache__/
+db.sqlite3
+media/
+staticfiles/
+local_settings.py
+db.sqlite3-journal
+
+# Environnement virtuel
+.venv/
+venv/
+ENV/
+env/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Tests
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+
+# Variables d'environnement
+.env
+.env.local
+.env.*.local
+
+# Fichiers de configuration locale
+*.local
+
+# Cache
+.cache/
+*.cache
+
+# Journaux
+logs/
+*.log
+
+# Migrations (optionnel - à commenter si vous voulez versionner les migrations)
+# */migrations/
+# !*/migrations/__init__.py

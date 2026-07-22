@@ -620,3 +620,65 @@ INFO 2026-07-22 09:40:21,985 basehttp 18116 "GET /audit/ HTTP/1.1" 200 17901
 INFO 2026-07-22 09:40:22,053 basehttp 18116 "GET /workflows/ HTTP/1.1" 200 20910
 INFO 2026-07-22 09:40:22,160 basehttp 18116 "GET /utilisateurs/ HTTP/1.1" 200 29074
 INFO 2026-07-22 09:40:22,331 basehttp 18116 - Broken pipe from ('127.0.0.1', 59648)
+WARNING 2026-07-22 09:55:42,589 log 18116 Not Found: /user/dashboard/
+WARNING 2026-07-22 09:55:42,589 basehttp 18116 "GET /user/dashboard/ HTTP/1.1" 404 4728
+WARNING 2026-07-22 09:56:09,518 log 18116 Not Found: /user/dashboard/
+WARNING 2026-07-22 09:56:09,518 basehttp 18116 "GET /user/dashboard/ HTTP/1.1" 404 4728
+WARNING 2026-07-22 10:00:58,401 log 18116 Not Found: /
+WARNING 2026-07-22 10:00:58,401 basehttp 18116 "GET / HTTP/1.1" 404 4665
+WARNING 2026-07-22 10:01:04,502 log 18116 Not Found: /user/admin/stats/
+WARNING 2026-07-22 10:01:04,504 basehttp 18116 "GET /user/admin/stats/ HTTP/1.1" 404 4734
+WARNING 2026-07-22 10:01:05,083 log 18116 Not Found: /user/admin/works/
+WARNING 2026-07-22 10:01:05,083 basehttp 18116 "GET /user/admin/works/ HTTP/1.1" 404 4734
+WARNING 2026-07-22 10:01:06,483 log 18116 Not Found: /user/admin/send-notification/
+WARNING 2026-07-22 10:01:06,483 basehttp 18116 "GET /user/admin/send-notification/ HTTP/1.1" 404 4770
+WARNING 2026-07-22 10:01:18,737 log 18116 Not Found: /
+WARNING 2026-07-22 10:01:18,738 basehttp 18116 "GET / HTTP/1.1" 404 4665
+WARNING 2026-07-22 10:01:54,631 log 18116 Not Found: /user/admin/send-notification/
+WARNING 2026-07-22 10:01:54,632 basehttp 18116 "GET /user/admin/send-notification/ HTTP/1.1" 404 4770
+WARNING 2026-07-22 10:02:52,982 log 18116 Not Found: /user/admin/send-notification/
+WARNING 2026-07-22 10:02:52,982 basehttp 18116 "GET /user/admin/send-notification/ HTTP/1.1" 404 4770
+WARNING 2026-07-22 10:02:53,730 log 18116 Not Found: /user/admin/send-notification/
+WARNING 2026-07-22 10:02:53,730 basehttp 18116 "GET /user/admin/send-notification/ HTTP/1.1" 404 4770
+INFO 2026-07-22 10:21:33,617 autoreload 18116 C:\semestre 6\SGDH\notifications\models.py changed, reloading.
+INFO 2026-07-22 10:29:58,751 autoreload 22216 Watching for file changes with StatReloader
+INFO 2026-07-22 10:31:12,864 autoreload 18852 Watching for file changes with StatReloader
+INFO 2026-07-22 10:31:31,806 autoreload 16144 Watching for file changes with StatReloader
+INFO 2026-07-22 10:32:15,665 basehttp 16144 "GET /user/admin/send-notification/ HTTP/1.1" 302 0
+WARNING 2026-07-22 10:32:15,688 log 16144 Not Found: /accounts/login/
+WARNING 2026-07-22 10:32:15,689 basehttp 16144 "GET /accounts/login/?next=/user/admin/send-notification/ HTTP/1.1" 404 5052
+WARNING 2026-07-22 10:33:06,221 log 16144 Not Found: /
+WARNING 2026-07-22 10:33:06,222 basehttp 16144 "GET / HTTP/1.1" 404 4953
+INFO 2026-07-22 10:33:23,631 basehttp 16144 "GET /user/admin/send-notification/ HTTP/1.1" 302 0
+WARNING 2026-07-22 10:33:23,643 log 16144 Not Found: /accounts/login/
+WARNING 2026-07-22 10:33:23,644 basehttp 16144 "GET /accounts/login/?next=/user/admin/send-notification/ HTTP/1.1" 404 5052
+INFO 2026-07-22 10:33:47,411 basehttp 16144 "GET /user/admin/send-notification/ HTTP/1.1" 302 0
+WARNING 2026-07-22 10:33:47,428 log 16144 Not Found: /accounts/login/
+WARNING 2026-07-22 10:33:47,429 basehttp 16144 "GET /accounts/login/?next=/user/admin/send-notification/ HTTP/1.1" 404 5052
+INFO 2026-07-22 10:34:55,644 autoreload 11928 Watching for file changes with StatReloader
+INFO 2026-07-22 10:35:34,022 basehttp 11928 "GET /user/admin/send-notification/ HTTP/1.1" 302 0
+INFO 2026-07-22 10:35:34,042 basehttp 11928 "GET /connexion/?next=/user/admin/send-notification/ HTTP/1.1" 200 4826
+WARNING 2026-07-22 10:36:12,082 log 11928 Not Found: /
+WARNING 2026-07-22 10:36:12,084 basehttp 11928 "GET / HTTP/1.1" 404 4953
+INFO 2026-07-22 10:37:06,605 autoreload 25300 Watching for file changes with StatReloader
+WARNING 2026-07-22 10:37:18,317 log 11928 Not Found: /
+WARNING 2026-07-22 10:37:18,319 basehttp 11928 "GET / HTTP/1.1" 404 4953
+INFO 2026-07-22 10:38:17,627 autoreload 11928 C:\semestre 6\SGDH\core\urls.py changed, reloading.
+INFO 2026-07-22 10:38:17,816 autoreload 25300 C:\semestre 6\SGDH\core\urls.py changed, reloading.
+INFO 2026-07-22 10:38:19,711 autoreload 4988 Watching for file changes with StatReloader
+INFO 2026-07-22 10:38:19,716 autoreload 25444 Watching for file changes with StatReloader
+INFO 2026-07-22 10:38:39,662 basehttp 4988 "GET / HTTP/1.1" 302 0
+INFO 2026-07-22 10:38:39,693 basehttp 4988 "GET /connexion/?next=/ HTTP/1.1" 200 4826
+WARNING 2026-07-22 10:38:39,763 basehttp 4988 "GET /static/css/sgdh.css HTTP/1.1" 404 1850
+INFO 2026-07-22 10:45:37,395 basehttp 4988 "GET /connexion/?next=/ HTTP/1.1" 200 4826
+WARNING 2026-07-22 10:45:37,470 basehttp 4988 "GET /static/css/sgdh.css HTTP/1.1" 404 1850
+INFO 2026-07-22 10:45:38,336 basehttp 4988 "GET /connexion/?next=/ HTTP/1.1" 200 4826
+WARNING 2026-07-22 10:45:38,395 basehttp 4988 "GET /static/css/sgdh.css HTTP/1.1" 404 1850
+INFO 2026-07-22 10:48:08,850 basehttp 4988 "GET /connexion/?next=/ HTTP/1.1" 200 8116
+WARNING 2026-07-22 10:48:08,917 basehttp 4988 "GET /static/css/sgdh.css HTTP/1.1" 404 1850
+INFO 2026-07-22 10:50:20,625 basehttp 4988 "GET /connexion/?next=/ HTTP/1.1" 200 3800
+WARNING 2026-07-22 10:50:20,709 basehttp 4988 "GET /static/css/sgdh.css HTTP/1.1" 404 1850
+INFO 2026-07-22 10:50:32,721 basehttp 4988 "GET /connexion/?next=/ HTTP/1.1" 200 3800
+WARNING 2026-07-22 10:50:32,792 basehttp 4988 "GET /static/css/sgdh.css HTTP/1.1" 404 1850
+INFO 2026-07-22 10:50:45,650 basehttp 4988 "GET /connexion/?next=/ HTTP/1.1" 200 8116
+WARNING 2026-07-22 10:50:45,736 basehttp 4988 "GET /static/css/sgdh.css HTTP/1.1" 404 1850

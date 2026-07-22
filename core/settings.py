@@ -68,6 +68,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
+LOGIN_URL = '/connexion/'
+
 AUTH_USER_MODEL = 'accounts.User'
 
 DATABASES = {

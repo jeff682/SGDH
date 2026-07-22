@@ -1,0 +1,61 @@
+{% extends "sgdh/shell.html" %}
+
+{% block page_title %}Envoyer une notification{% endblock %}
+
+{% block page_content %}
+<div>
+    <div style="margin-bottom: 24px;">
+        <h1 style="font-size: 22px; font-weight: 800; color: #0F172A; margin: 0;">Envoyer une notification</h1>
+        <p style="color: #64748B; font-size: 14px; margin-top: 4px;">Envoyer un message à un utilisateur du système</p>
+    </div>
+
+    {% if messages %}
+    <div style="margin-bottom: 20px;">
+        {% for message in messages %}
+        <div class="alert" style="padding: 12px 16px; border-radius: 8px; margin-bottom: 8px; font-size: 13px;
+            {% if message.tags == 'success' %}background: #ECFDF5; color: #065F46; border: 1px solid #A7F3D0;
+            {% elif message.tags == 'error' %}background: #FEF2F2; color: #991B1B; border: 1px solid #FECACA;
+            {% else %}background: #EFF6FF; color: #1E40AF; border: 1px solid #BFDBFE;
+            {% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="card" style="max-width: 640px; padding: 24px;">
+        <form method="post">
+            {% csrf_token %}
+
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+                <div>
+                    <label class="form-label" style="font-weight: 600;">Destinataire</label>
+                    <select class="form-input" name="user_id" required>
+                        <option value="">Sélectionner un utilisateur</option>
+                        {% for user in users %}
+                        <option value="{{ user.id }}">
+                            {{ user.get_full_name|default:user.email }} ({{ user.email }})
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div>
+                    <label class="form-label" style="font-weight: 600;">Sujet</label>
+                    <input class="form-input" type="text" name="subject" placeholder="Sujet de la notification" required>
+                </div>
+
+                <div>
+                    <label class="form-label" style="font-weight: 600;">Message</label>
+                    <textarea class="form-input" name="message" rows="6" placeholder="Rédigez votre message ici…" required style="resize: vertical;"></textarea>
+                </div>
+
+                <div style="display: flex; gap: 12px;">
+                    <button type="submit" class="btn-primary">Envoyer la notification</button>
+                    <a href="{% url 'sgdh:settings' %}" class="btn-secondary" style="text-decoration: none; display: inline-flex; align-items: center;">Annuler</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
